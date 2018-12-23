@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<!--parallel,设置并行执行级别(tests,methods,classes,instances);thread-count 设置线程数; preserve-order 顺序执行-->
+<suite name="All Test Suite" parallel="tests" thread-count="3" preserve-order="true">
+    <test verbose="2" preserve-order="true" name="XunitDemo">
+        <groups>
+            <dependencies>
+                <group name="group1" depends-on="">
+                    <classes>
+                        <class name="TestXunit.LoginTest">
+                            <methods>
+                            <include name="testUserLogin1"></include>
+                            <include name="testUserLogin2"></include>
+                            <include name="testUserLogin3"></include>
+                            </methods>
+                        </class>
+                        <class name="TestXunit.ShoppingTest">
+
+                        </class>
+                    </classes>
+                </group>
+            </dependencies>
+        </groups>
+
+    </test>
+</suite>
+
+
+
+
+<!--<parameter name="aa" value="a"></parameter>-->
+<!--<parameter name="bb" value="b"></parameter>-->
+<!--<classes>-->
+<!--&lt;!&ndash;<class name="DemoXunit.LoginTest">&ndash;&gt;-->
+<!--&lt;!&ndash;<methods>&ndash;&gt;-->
+<!--&lt;!&ndash;<include name="testLogin"></include>&ndash;&gt;-->
+<!--&lt;!&ndash;</methods>&ndash;&gt;-->
+<!--&lt;!&ndash;</class>&ndash;&gt;-->
+
+<!--<class name="DemoXunit.ShoppingTest">-->
+    <!--<methods>-->
+        <!--&lt;!&ndash;<include name="testShopping" ></include>&ndash;&gt;-->
+        <!--<include name="testS"></include>-->
+    <!--</methods>-->
+<!--</class>-->
+<!--</classes>-->

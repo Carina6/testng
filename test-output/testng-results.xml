@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="6" passed="6">
+  <reporter-output>
+  </reporter-output>
+  <suite name="All Test Suite" duration-ms="41" started-at="2018-12-23T14:18:10Z" finished-at="2018-12-23T14:18:10Z">
+    <groups>
+    </groups>
+    <test name="XunitDemo" duration-ms="41" started-at="2018-12-23T14:18:10Z" finished-at="2018-12-23T14:18:10Z">
+      <class name="TestXunit.ShoppingTest">
+        <test-method status="PASS" signature="testGetPrice(int, int)[pri:0, instance:TestXunit.ShoppingTest@28f67ac7]" name="testGetPrice" duration-ms="1" started-at="2018-12-23T14:18:10Z" data-provider="getProPrice" finished-at="2018-12-23T14:18:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[200]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetPrice -->
+        <test-method status="PASS" signature="testGetPrice(int, int)[pri:0, instance:TestXunit.ShoppingTest@28f67ac7]" name="testGetPrice" duration-ms="0" started-at="2018-12-23T14:18:10Z" data-provider="getProPrice" finished-at="2018-12-23T14:18:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[3]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[80]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetPrice -->
+        <test-method status="PASS" signature="testGetPrice(int, int)[pri:0, instance:TestXunit.ShoppingTest@28f67ac7]" name="testGetPrice" duration-ms="0" started-at="2018-12-23T14:18:10Z" data-provider="getProPrice" finished-at="2018-12-23T14:18:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[2]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[120]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetPrice -->
+      </class> <!-- TestXunit.ShoppingTest -->
+      <class name="TestXunit.LoginTest">
+        <test-method status="PASS" signature="testUserLogin1()[pri:0, instance:TestXunit.LoginTest@357246de]" name="testUserLogin1" duration-ms="9" started-at="2018-12-23T14:18:10Z" finished-at="2018-12-23T14:18:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testUserLogin1 -->
+        <test-method status="PASS" signature="testUserLogin2()[pri:0, instance:TestXunit.LoginTest@357246de]" name="testUserLogin2" duration-ms="0" started-at="2018-12-23T14:18:10Z" finished-at="2018-12-23T14:18:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testUserLogin2 -->
+        <test-method status="PASS" signature="testUserLogin3()[pri:0, instance:TestXunit.LoginTest@357246de]" name="testUserLogin3" duration-ms="0" started-at="2018-12-23T14:18:10Z" finished-at="2018-12-23T14:18:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testUserLogin3 -->
+      </class> <!-- TestXunit.LoginTest -->
+    </test> <!-- XunitDemo -->
+  </suite> <!-- All Test Suite -->
+</testng-results>
