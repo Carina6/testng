@@ -17,7 +17,7 @@ public class Shopping {
      */
     public int getPrice(int proId){
         if(login.isLogin == true){
-            if (proId < 0 ){ //1
+            if (proId <= 0 ){ //1
                 return -1;
             }else{
                 Products p= Products.getPro(proId);
@@ -87,6 +87,9 @@ public class Shopping {
         }
 
         pro = getPro(proId);
+        if(pro == null){
+            return 0;
+        }
         int proCount = pro.getCount();
 
         //库存充盈，可以购买
