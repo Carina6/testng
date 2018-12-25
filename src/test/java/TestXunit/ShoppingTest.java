@@ -26,7 +26,7 @@ public class ShoppingTest {
         Assert.assertEquals(price, expect);
     }
 
-    @Test(dataProvider = "buyDataForWithoutLogin", dataProviderClass = ParamData.class, groups = "buy-without-login")
+    @Test(dataProvider = "dataProvider", dataProviderClass = ParamData.class, groups = "buy-without-login")
     public void testBuyWithoutLogin(int proId, int count, int expect) {
 //        logout();
         System.out.println("testBuyWithoutLogin : " + System.currentTimeMillis());
@@ -36,7 +36,7 @@ public class ShoppingTest {
 
     }
 
-    @Test(dataProvider = "buyDataForAbnormal", dataProviderClass = ParamData.class, groups = "buy-with-login")
+    @Test(dataProvider = "dataProvider", dataProviderClass = ParamData.class, groups = "buy-with-login")
     public void testBuyWithAbnormal(int proId, int count, int expect) {
         System.out.println("testBuyWithAbnormal : " + System.currentTimeMillis());
         System.out.println("testBuyWithAbnormal : " + Thread.currentThread());
@@ -45,7 +45,7 @@ public class ShoppingTest {
 
     }
 
-    @Test(dataProvider = "buyDataForNormal", dataProviderClass = ParamData.class, groups = "buy-with-login")
+    @Test(dataProvider = "dataProvider", dataProviderClass = ParamData.class, groups = "buy-with-login")
     public void testBuyWithNormal(int proId, int count, int expect) {
         System.out.println("testBuyWithNormal : " + System.currentTimeMillis());
         System.out.println("testBuyWithNormal : " + Thread.currentThread());
