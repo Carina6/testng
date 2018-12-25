@@ -19,7 +19,15 @@ public class ParamData {
     }
 
     @DataProvider
-    public Object[][] buyDataUnnormal(){
+    public Object[][] buyDataForWithoutLogin(){
+        return new Object[][]{
+                //未登录购买
+                {2, 2, -2}
+        };
+    }
+
+    @DataProvider
+    public Object[][] buyDataForUnnormal(){
         return new Object[][]{
                 //无此商品
                 {0, 2, 0},
@@ -31,12 +39,11 @@ public class ParamData {
     }
 
     @DataProvider
-    public Object[][] buyDataNormal(){
+    public Object[][] buyDataForNormal(){
         return new Object[][]{
                 //正常购买
                 {2, 2, 1},
                 {3, 1, 1},
-
         };
     }
 }

@@ -4,7 +4,7 @@
 <!--name:suit 名称，测试报告中展示; verbose:在控制台中如何输出(1,2,3,4);-->
 <!--parallel,设置并行执行级别(tests,methods,classes,instances);thread-count 设置线程数; preserve-order 顺序执行-->
 <!--parallel="tests" thread-count="3" preserve-order="true"-->
-<suite name="All Test Suite">
+<suite name="All Test Suite" preserve-order="true">
     <test verbose="2" preserve-order="true" name="Login">
         <parameter name="name" value="test"/>
         <parameter name="pwd" value="admin"/>
@@ -27,22 +27,28 @@
         </classes>
 
     </test>
-
-    <test name="Shopping">
-        <!--<groups>-->
-            <!--<run>-->
-                <!--<include name="normal"/>-->
-            <!--</run>-->
-        <!--</groups>-->
+    <test name="Shopping-without-login">
+        <groups>
+            <run>
+                <include name="buy-without-login"/>
+            </run>
+        </groups>
         <classes>
-            <!--<class name="TestXunit.LoginTest"/>-->
             <class name="TestXunit.ShoppingTest">
-                <methods>
-                    <include name="testBuyWithUnnormal"/>
-                    <include name="testBuyWithNormal"/>
-                </methods>
             </class>
+        </classes>
+    </test>
 
+    <!--<test name="Shopping-with-login" preserve-order="true" parallel="methods" thread-count="3">-->
+    <test name="Shopping-with-login" preserve-order="true">
+        <groups>
+            <run>
+                <include name="buy-with-login"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="TestXunit.ShoppingTest">
+            </class>
         </classes>
     </test>
 
