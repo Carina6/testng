@@ -16,8 +16,9 @@ public class ShoppingTest {
     public void login() {
         System.out.println("login : " + System.currentTimeMillis());
         System.out.println("login : " + Thread.currentThread());
-        login.userLogin("user", "pwd");
-        Assert.assertTrue(Login.isLogin, "登录失败");
+        String res = login.userLogin("user", "pwd");
+
+        Assert.assertEquals(res, "欢迎user");
     }
 
     @Test(dataProvider = "getProPrice", dataProviderClass = ParamData.class)
@@ -59,8 +60,8 @@ public class ShoppingTest {
 
     @AfterMethod(groups = "buy-with-login")
     public void logout() {
-        login.userLogin("", "");
-        Assert.assertFalse(Login.isLogin, "退出登录失败");
+        String res = login.userLogin("", "");
+        Assert.assertEquals(res, "用户名或密码不能为空");
         System.out.println("logout : " + System.currentTimeMillis());
         System.out.println("logout : " + Thread.currentThread());
     }

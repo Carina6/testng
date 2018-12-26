@@ -2,11 +2,9 @@ package TestXunit;
 
 import DemoXunit.Login;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class LoginTest {
-//    @BeforeTest
     @Test(groups = {"normal"})
     public void testUserLogin1() {
         Login login = new Login();

@@ -5,28 +5,6 @@
 <!--parallel,设置并行执行级别(tests,methods,classes,instances);thread-count 设置线程数; preserve-order 顺序执行-->
 <!--parallel="tests" thread-count="3" preserve-order="true"-->
 <suite name="All Test Suite" preserve-order="true">
-    <test verbose="2" preserve-order="true" name="Login">
-        <parameter name="name" value="test"/>
-        <parameter name="pwd" value="admin"/>
-        <parameter name="expect" value="欢迎test"/>
-        <!--groups 需与classes一起使用，用来将测试用例分组，可定义组中组; 组可以在定义在方法、类上-->
-        <groups>
-            <!--可以组装组中组-->
-            <define name="all">
-                <include name="unnormal"/>
-                <include name="normal"/>
-                <include name="admin"/>
-            </define>
-            <!--执行的组-->
-            <run>
-                <include name="admin"/>
-            </run>
-        </groups>
-        <classes>
-            <!--<class name="TestXunit.LoginTest"/>-->
-        </classes>
-
-    </test>
     <test name="Shopping-without-login">
         <groups>
             <run>

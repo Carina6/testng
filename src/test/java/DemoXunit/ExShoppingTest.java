@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
  *
  * @Description:
  */
-public class ShoppingTest {
+public class ExShoppingTest {
 
     Login login = new Login();
     Shopping shopping = new Shopping();
@@ -36,7 +36,7 @@ public class ShoppingTest {
      * @param count
      * @param expect
      */
-    @Test(dataProvider = "getProducts", dataProviderClass = GenrateData.class, dependsOnMethods = {"LoginTest.testLogin"})
+    @Test(dataProvider = "getProducts", dataProviderClass = GenrateData.class, dependsOnMethods = {"ExLoginTest.testLogin"})
     public void testShopping(int proId, int count, int expect){
         int results = shopping.buys(proId,count);
         Assert.assertEquals(results,expect);

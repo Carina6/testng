@@ -8,11 +8,6 @@
     <artifactId>XunitDemo</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
-    <properties>
-
-    </properties>
-
     <dependencies>
 
         <!-- https://mvnrepository.com/artifact/org.testng/testng -->
@@ -24,6 +19,18 @@
         </dependency>
 
     </dependencies>
+
+    <properties>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+
+        <!--<maven.test.skip>true</maven.test.skip>-->
+        <skipTests>false</skipTests>
+        <suiteXmlFile>testng.xml</suiteXmlFile>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -32,7 +39,7 @@
                 <version>2.22.1</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
 
