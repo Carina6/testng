@@ -4,6 +4,7 @@ import DemoXunit.Login;
 import DemoXunit.Shopping;
 import LoginData.ParamData;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -12,45 +13,35 @@ public class ShoppingTest {
     Shopping shopping = new Shopping();
     Login login = new Login();
 
-    @BeforeMethod(groups = "buy-with-login")
-    public void login() {
-        System.out.println("login : " + System.currentTimeMillis());
-        System.out.println("login : " + Thread.currentThread());
-        String res = login.userLogin("user", "pwd");
-
-        Assert.assertEquals(res, "欢迎user");
-    }
-
     @Test(dataProvider = "getProPrice", dataProviderClass = ParamData.class)
     public void testGetPrice(int proId, int expect) {
         int price = shopping.getPrice(proId);
         Assert.assertEquals(price, expect);
     }
 
-    @Test(dataProvider = "dataProvider", dataProviderClass = ParamData.class, groups = "buy-without-login")
-    public void testBuyWithoutLogin(int proId, int count, int expect) {
-//        logout();
-        System.out.println("testBuyWithoutLogin : " + System.currentTimeMillis());
-        System.out.println("testBuyWithoutLogin : " + Thread.currentThread());
-        int res = shopping.buys(proId, count);
-        Assert.assertEquals(res, expect);
+    @BeforeMethod(groups = {"normal","abnormal"})
+    public void login() {
+//        System.out.println("login : " + Thread.currentThread());
+        String res = login.userLogin("user", "pwd");
 
+        Assert.assertEquals(res, "欢迎user");
     }
 
-    @Test(dataProvider = "dataProvider", dataProviderClass = ParamData.class, groups = "buy-with-login")
+    @Test(dataProvider = "buyDataForAbnormal", dataProviderClass = ParamData.class, groups = {"abnormal"})
     public void testBuyWithAbnormal(int proId, int count, int expect) {
-        System.out.println("testBuyWithAbnormal : " + System.currentTimeMillis());
-        System.out.println("testBuyWithAbnormal : " + Thread.currentThread());
+//        System.out.println("testBuyWithAbnormal : " + Thread.currentThread());
         int res = shopping.buys(proId, count);
         Assert.assertEquals(res, expect);
 
     }
 
-    @Test(dataProvider = "dataProvider", dataProviderClass = ParamData.class, groups = "buy-with-login")
-    public void testBuyWithNormal(int proId, int count, int expect) {
-        System.out.println("testBuyWithNormal : " + System.currentTimeMillis());
-        System.out.println("testBuyWithNormal : " + Thread.currentThread());
+    @Test(dataProvider = "buyDataForNormal", dataProviderClass = ParamData.class, groups = {"normal", "restore"})
+    public void testBuyWithNormal(int proId, int count, int expect, ITestContext context) {
+//        System.out.println("testBuyWithNormal : " + Thread.currentThread());
+
         int pre_count = shopping.getPro(proId).getCount();
+        context.setAttribute("proId", proId);
+        context.setAttribute("pre_count", pre_count);
 
         int res = shopping.buys(proId, count);
         Assert.assertEquals(res, expect);
@@ -58,12 +49,25 @@ public class ShoppingTest {
         Assert.assertEquals(shopping.getPro(proId).getCount(), pre_count - count);
     }
 
-    @AfterMethod(groups = "buy-with-login")
-    public void logout() {
+    @Test(dataProvider = "buyDataForWithoutLogin", dataProviderClass = ParamData.class, groups = {"not_login"})
+    public void testBuyWithoutLogin(int proId, int count, int expect) {
+//        System.out.println("testBuyWithoutLogin : " + Thread.currentThread());
+        int res = shopping.buys(proId, count);
+        Assert.assertEquals(res, expect);
+
+    }
+
+    @AfterMethod(groups = {"normal","abnormal"})
+    public void logout(ITestContext context) {
+//        System.out.println("logout : " + Thread.currentThread());
         String res = login.userLogin("", "");
         Assert.assertEquals(res, "用户名或密码不能为空");
-        System.out.println("logout : " + System.currentTimeMillis());
-        System.out.println("logout : " + Thread.currentThread());
+    }
+
+    @AfterMethod(groups = {"normal"})
+    public void restoreData(ITestContext context){
+        int proId = (Integer) context.getAttribute("proId");
+        shopping.getPro(proId).setCount((Integer) context.getAttribute("pre_count"));
     }
 
 }

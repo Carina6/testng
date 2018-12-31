@@ -5,10 +5,11 @@
 <!--parallel,设置并行执行级别(tests,methods,classes,instances);thread-count 设置线程数; preserve-order 顺序执行-->
 <!--parallel="tests" thread-count="3" preserve-order="true"-->
 <suite name="All Test Suite" preserve-order="true">
-    <test name="Shopping-without-login">
+    <!--<test name="Shopping-with-login" preserve-order="true" parallel="methods" thread-count="3">-->
+    <test name="normal" preserve-order="true">
         <groups>
             <run>
-                <include name="buy-without-login"/>
+                <include name="normal"/>
             </run>
         </groups>
         <classes>
@@ -17,11 +18,22 @@
         </classes>
     </test>
 
-    <!--<test name="Shopping-with-login" preserve-order="true" parallel="methods" thread-count="3">-->
+    <test name="not_login">
+        <groups>
+            <run>
+                <include name="not_login"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="TestXunit.ShoppingTest">
+            </class>
+        </classes>
+    </test>
+
     <test name="Shopping-with-login" preserve-order="true">
         <groups>
             <run>
-                <include name="buy-with-login"/>
+                <include name="abnormal"/>
             </run>
         </groups>
         <classes>
