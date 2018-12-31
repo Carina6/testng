@@ -63,12 +63,18 @@ public class ParamData {
     @DataProvider
     public Object[][] buyDataForAbnormal(){
         return new Object[][]{
-                //无此商品
-                {0, 2, 0},
                 //购买数量小于等于0
                 {1, 0, -1},
                 //购买数量大于库存
                 {1, 1, 0}
+        };
+    }
+
+    @DataProvider
+    public Object[][] buyDataForAbnormal1(){
+        return new Object[][]{
+                //无此商品
+                {0, 2, 0}
         };
     }
 

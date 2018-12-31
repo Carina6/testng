@@ -1,13 +1,12 @@
 package TestXunit;
 
 import DemoXunit.Login;
+import DemoXunit.Products;
 import DemoXunit.Shopping;
 import LoginData.ParamData;
 import org.testng.Assert;
 import org.testng.ITestContext;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class ShoppingTest {
     Shopping shopping = new Shopping();
@@ -19,33 +18,40 @@ public class ShoppingTest {
         Assert.assertEquals(price, expect);
     }
 
-    @BeforeMethod(groups = {"normal","abnormal"})
+    @BeforeGroups(groups = {"abnormal","normal"})
     public void login() {
 //        System.out.println("login : " + Thread.currentThread());
         String res = login.userLogin("user", "pwd");
-
         Assert.assertEquals(res, "欢迎user");
+    }
+
+    @Test(dataProvider = "buyDataForAbnormal1", dataProviderClass = ParamData.class, groups = {"abnormal"})
+    public void testBuyWithAbnormal1(int proId, int count, int expect) {
+//        System.out.println("testBuyWithAbnormal : " + Thread.currentThread());
+        int res = shopping.buys(proId, count);
+        Assert.assertEquals(res, expect);
     }
 
     @Test(dataProvider = "buyDataForAbnormal", dataProviderClass = ParamData.class, groups = {"abnormal"})
     public void testBuyWithAbnormal(int proId, int count, int expect) {
 //        System.out.println("testBuyWithAbnormal : " + Thread.currentThread());
+        int pre_count = shopping.getPro(proId).getCount();
+
         int res = shopping.buys(proId, count);
         Assert.assertEquals(res, expect);
+        Assert.assertEquals(shopping.getPro(proId).getCount(), pre_count);
 
     }
 
-    @Test(dataProvider = "buyDataForNormal", dataProviderClass = ParamData.class, groups = {"normal", "restore"})
+    @Test(dataProvider = "buyDataForNormal", dataProviderClass = ParamData.class, groups = {"normal"})
     public void testBuyWithNormal(int proId, int count, int expect, ITestContext context) {
 //        System.out.println("testBuyWithNormal : " + Thread.currentThread());
-
         int pre_count = shopping.getPro(proId).getCount();
         context.setAttribute("proId", proId);
         context.setAttribute("pre_count", pre_count);
 
         int res = shopping.buys(proId, count);
         Assert.assertEquals(res, expect);
-
         Assert.assertEquals(shopping.getPro(proId).getCount(), pre_count - count);
     }
 
@@ -57,7 +63,7 @@ public class ShoppingTest {
 
     }
 
-    @AfterMethod(groups = {"normal","abnormal"})
+    @AfterGroups(groups = {"abnormal", "normal"})
     public void logout(ITestContext context) {
 //        System.out.println("logout : " + Thread.currentThread());
         String res = login.userLogin("", "");
@@ -66,8 +72,16 @@ public class ShoppingTest {
 
     @AfterMethod(groups = {"normal"})
     public void restoreData(ITestContext context){
+        System.out.println("------restore------");
+        if(context.getAttribute("proId") == null){
+            System.out.println("no need to restore!");
+            return;
+        }
         int proId = (Integer) context.getAttribute("proId");
-        shopping.getPro(proId).setCount((Integer) context.getAttribute("pre_count"));
+        int pre_count = (Integer) context.getAttribute("pre_count");
+
+        shopping.getPro(proId).setCount(pre_count);
+        Assert.assertEquals(shopping.getPro(proId).getCount(), pre_count);
     }
 
 }

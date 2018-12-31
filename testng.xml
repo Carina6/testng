@@ -6,33 +6,23 @@
 <!--parallel="tests" thread-count="3" preserve-order="true"-->
 <suite name="All Test Suite" preserve-order="true">
     <!--<test name="Shopping-with-login" preserve-order="true" parallel="methods" thread-count="3">-->
-    <test name="normal" preserve-order="true">
-        <groups>
-            <run>
-                <include name="normal"/>
-            </run>
-        </groups>
-        <classes>
-            <class name="TestXunit.ShoppingTest">
-            </class>
-        </classes>
-    </test>
+    <!--<test name="normal" preserve-order="true">-->
+        <!--<groups>-->
+            <!--<run>-->
+                <!--<include name="normal"/>-->
+            <!--</run>-->
+        <!--</groups>-->
+        <!--<classes>-->
+            <!--<class name="TestXunit.ShoppingTest">-->
+            <!--</class>-->
+        <!--</classes>-->
+    <!--</test>-->
 
     <test name="not_login">
         <groups>
             <run>
                 <include name="not_login"/>
-            </run>
-        </groups>
-        <classes>
-            <class name="TestXunit.ShoppingTest">
-            </class>
-        </classes>
-    </test>
-
-    <test name="Shopping-with-login" preserve-order="true">
-        <groups>
-            <run>
+                <include name="normal"/>
                 <include name="abnormal"/>
             </run>
         </groups>
@@ -41,5 +31,17 @@
             </class>
         </classes>
     </test>
+
+    <!--<test name="abnormal" preserve-order="true">-->
+        <!--<groups>-->
+            <!--<run>-->
+                <!--<include name="abnormal"/>-->
+            <!--</run>-->
+        <!--</groups>-->
+        <!--<classes>-->
+            <!--<class name="TestXunit.ShoppingTest">-->
+            <!--</class>-->
+        <!--</classes>-->
+    <!--</test>-->
 
 </suite>
